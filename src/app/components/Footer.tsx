@@ -46,7 +46,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-gray-800 pt-4 sm:pt-6 lg:pt-8 text-center text-gray-400">
-          <p>&copy; 2026 DevDeals. Todos os direitos reservados. Desenvolvido com 💜 por DevDeals</p>
+          <p>&copy; 2026 DevDeals. Todos os direitos reservados. Desenvolvido por DevDeals</p>
         </div>
       </div>
     </footer>

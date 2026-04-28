@@ -20,6 +20,7 @@ export default function Home({ onWhatsAppClick }: HomeProps) {
   const [countryCode, setCountryCode] = useState('+351');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [isDesktop, setIsDesktop] = useState(false);
 
   // Animação de contagem
   const [revenueCount, setRevenueCount] = useState(0);
@@ -34,9 +35,9 @@ export default function Home({ onWhatsAppClick }: HomeProps) {
           clearInterval(revenueInterval);
           return 350;
         }
-        return prev + 15;
+        return prev + 8;
       });
-    }, 15);
+    }, 35);
 
     // Animação para 30+
     const clientsInterval = setInterval(() => {
@@ -47,7 +48,7 @@ export default function Home({ onWhatsAppClick }: HomeProps) {
         }
         return prev + 1;
       });
-    }, 30);
+    }, 60);
 
     // Animação para 15 dias
     const daysInterval = setInterval(() => {
@@ -58,7 +59,7 @@ export default function Home({ onWhatsAppClick }: HomeProps) {
         }
         return prev + 1;
       });
-    }, 40);
+    }, 80);
 
     return () => {
       clearInterval(revenueInterval);
@@ -78,6 +79,18 @@ export default function Home({ onWhatsAppClick }: HomeProps) {
       window.clearTimeout(timeoutId);
     };
   }, [submitMessage]);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(min-width: 640px)');
+    const updateIsDesktop = () => setIsDesktop(mediaQuery.matches);
+
+    updateIsDesktop();
+    mediaQuery.addEventListener('change', updateIsDesktop);
+
+    return () => {
+      mediaQuery.removeEventListener('change', updateIsDesktop);
+    };
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -280,17 +293,17 @@ export default function Home({ onWhatsAppClick }: HomeProps) {
               >
                 <motion.button
                   onClick={() => onWhatsAppClick('Olá! Gostaria de iniciar um projeto com a DevDeals.')}
-                  className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-10 py-4 rounded-full shadow-lg font-semibold cursor-pointer relative group flex items-center gap-2 min-w-fit"
-                  whileHover={{
+                  className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 sm:px-10 py-4 rounded-full shadow-lg font-semibold cursor-pointer relative group flex items-center gap-2 w-auto min-w-[10.5rem] sm:min-w-fit"
+                  whileHover={isDesktop ? {
                     width: "100%",
                     boxShadow: "0 20px 40px rgba(147, 51, 234, 0.4)"
-                  }}
+                  } : undefined}
                   whileTap={{ scale: 0.98 }}
                   transition={{ duration: 0.4, ease: "easeOut" }}
                 >
-                  <span className="relative z-10">Iniciar Projeto</span>
-                  <ArrowRight className="w-5 h-5 relative z-10 group-hover:ml-auto transition-all duration-400" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></div>
+                  <span className="relative z-10 whitespace-nowrap sm:flex-1 sm:text-left">Iniciar Projeto</span>
+                  <ArrowRight className="w-5 h-5 relative z-10 sm:transition-transform sm:duration-300 sm:group-hover:translate-x-1" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 sm:transition-opacity sm:duration-300 rounded-full"></div>
                 </motion.button>
               </motion.div>
 
