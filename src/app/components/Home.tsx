@@ -1,11 +1,13 @@
 import { Code2, Smartphone, ShoppingCart, Palette, CheckCircle, ArrowRight, Zap, Shield, Headphones, Star, Send, Mail, Phone, Building, User } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
 interface HomeProps {
   onWhatsAppClick: (message: string) => void;
 }
+
+const CONTACT_SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwo3WXNfryq9iJVsBqszuK-OKnFGOx8SIPOwxTpXhRiK-KLyeXgj2X54KTUjlFuGqSr/exec';
 
 export default function Home({ onWhatsAppClick }: HomeProps) {
   const [formData, setFormData] = useState({
@@ -16,6 +18,8 @@ export default function Home({ onWhatsAppClick }: HomeProps) {
     mensagem: ''
   });
   const [countryCode, setCountryCode] = useState('+351');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
   // Animação de contagem
   const [revenueCount, setRevenueCount] = useState(0);
@@ -63,20 +67,86 @@ export default function Home({ onWhatsAppClick }: HomeProps) {
     };
   }, []);
 
+  useEffect(() => {
+    if (!submitMessage) return;
+
+    const timeoutId = window.setTimeout(() => {
+      setSubmitMessage(null);
+    }, 5000);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+    };
+  }, [submitMessage]);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Adicionar integração com Google Sheets aqui
+    setIsSubmitting(true);
+    setSubmitMessage(null);
+
+    const phoneDigits = formData.telefone.replace(/\D/g, '');
+    if (phoneDigits.length < 9) {
+      setSubmitMessage({
+        type: 'error',
+        text: 'O telefone deve conter no minimo 9 numeros.'
+      });
+      setIsSubmitting(false);
+      return;
+    }
+
     const fullData = {
       ...formData,
       telefoneCompleto: `${countryCode} ${formData.telefone}`
     };
-    console.log('Dados do formulário:', fullData);
-    alert('Formulário enviado! (Integração pendente)');
+
+    try {
+      const payload = new URLSearchParams({
+        nome: fullData.nome,
+        email: fullData.email,
+        empresa: fullData.empresa,
+        telefone: fullData.telefone,
+        countryCode,
+        telefoneCompleto: fullData.telefoneCompleto,
+        mensagem: fullData.mensagem
+      });
+
+      await fetch(CONTACT_SHEET_ENDPOINT, {
+        method: 'POST',
+        // Apps Script Web Apps often block CORS in browsers; no-cors allows the
+        // request to be delivered without requiring CORS response headers.
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+        },
+        body: payload.toString()
+      });
+
+      setSubmitMessage({
+        type: 'success',
+        text: 'Mensagem enviada com sucesso! Entraremos em contato em breve.'
+      });
+      setFormData({
+        nome: '',
+        email: '',
+        empresa: '',
+        telefone: '',
+        mensagem: ''
+      });
+      setCountryCode('+351');
+    } catch (error) {
+      console.error('Erro ao enviar formulário:', error);
+      setSubmitMessage({
+        type: 'error',
+        text: 'Não foi possível enviar agora. Tente novamente em instantes ou entre em contato pelo WhatsApp.'
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   // Animation variants
@@ -633,6 +703,9 @@ export default function Home({ onWhatsAppClick }: HomeProps) {
                         value={formData.telefone}
                         onChange={handleInputChange}
                         required
+                        minLength={9}
+                        pattern="(?:\D*\d){9,}\D*"
+                        title="Digite pelo menos 9 numeros"
                         className="w-full pl-12 pr-4 py-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-transparent outline-none transition"
                         placeholder="91 234 5678"
                       />
@@ -658,15 +731,22 @@ export default function Home({ onWhatsAppClick }: HomeProps) {
 
                 <motion.button
                   type="submit"
+                  disabled={isSubmitting}
                   className="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-5 rounded-xl font-bold text-lg flex items-center justify-center gap-3 cursor-pointer relative overflow-hidden group"
                   whileHover={{ scale: 1.02, boxShadow: "0 20px 40px rgba(147, 51, 234, 0.4)" }}
                   whileTap={{ scale: 0.98 }}
                   transition={{ duration: 0.2 }}
                 >
                   <Send className="w-6 h-6 relative z-10" />
-                  <span className="relative z-10">Enviar Mensagem</span>
+                  <span className="relative z-10">{isSubmitting ? 'Enviando...' : 'Enviar Mensagem'}</span>
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </motion.button>
+
+                {submitMessage && (
+                  <p className={`text-sm font-medium ${submitMessage.type === 'success' ? 'text-green-600' : 'text-red-600'}`}>
+                    {submitMessage.text}
+                  </p>
+                )}
               </form>
             </motion.div>
           </div>

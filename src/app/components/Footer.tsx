@@ -1,3 +1,5 @@
+import React from 'react';
+
 export default function Footer() {
   return (
     <footer className="bg-gray-900 text-white py-8 sm:py-12 lg:py-16 px-4 sm:px-6 lg:px-8">
@@ -29,7 +31,6 @@ export default function Footer() {
             <h4 className="font-bold text-lg mb-3 sm:mb-4 lg:mb-6">Empresa</h4>
             <ul className="space-y-2 sm:space-y-3 text-gray-400">
               <li><a href="#sobre" className="hover:text-white transition">Sobre Nós</a></li>
-              <li><a href="#" className="hover:text-white transition">Carreira</a></li>
               <li><a href="#contato" className="hover:text-white transition">Contato</a></li>
             </ul>
           </div>
@@ -38,7 +39,7 @@ export default function Footer() {
             <h4 className="font-bold text-lg mb-3 sm:mb-4 lg:mb-6">Redes Sociais</h4>
             <ul className="space-y-2 sm:space-y-3 text-gray-400">
               <li><a href="#" className="hover:text-white transition">LinkedIn</a></li>
-              <li><a href="#" className="hover:text-white transition">Instagram</a></li>
+              <li><a href="https://www.instagram.com/devdeals.app" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">Instagram</a></li>
               <li><a href="#" className="hover:text-white transition">Facebook</a></li>
             </ul>
           </div>
