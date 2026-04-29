@@ -293,7 +293,7 @@ export default function Home({ onWhatsAppClick }: HomeProps) {
               >
                 <motion.button
                   onClick={() => onWhatsAppClick('Olá! Gostaria de iniciar um projeto com a DevDeals.')}
-                  className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 sm:px-10 py-4 rounded-full shadow-lg font-semibold cursor-pointer relative group flex items-center gap-2 w-full sm:w-auto min-w-[10.5rem] sm:min-w-fit"
+                  className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 sm:px-10 py-4 rounded-full shadow-lg font-semibold cursor-pointer relative group flex items-center gap-2 w-auto min-w-0 sm:min-w-[13.5rem]"
                   whileHover={isDesktop ? {
                     width: "100%",
                     boxShadow: "0 20px 40px rgba(147, 51, 234, 0.4)"
