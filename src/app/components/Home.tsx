@@ -28,14 +28,14 @@ export default function Home({ onWhatsAppClick }: HomeProps) {
   const [daysCount, setDaysCount] = useState(0);
 
   useEffect(() => {
-    // Animação para +350%
+    // Animação para +80%
     const revenueInterval = setInterval(() => {
       setRevenueCount(prev => {
-        if (prev >= 350) {
+        if (prev >= 85) {
           clearInterval(revenueInterval);
-          return 350;
+          return 85;
         }
-        return prev + 8;
+        return prev + 1;
       });
     }, 35);
 
@@ -317,7 +317,7 @@ export default function Home({ onWhatsAppClick }: HomeProps) {
                   <div className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                     +{revenueCount}%
                   </div>
-                  <div className="text-gray-600 mt-2 font-medium text-sm sm:text-base">Receita Gerada</div>
+                  <div className="text-gray-600 mt-2 font-medium text-sm sm:text-base">Aumento em vendas</div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
