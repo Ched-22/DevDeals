@@ -286,24 +286,24 @@ export default function Home({ onWhatsAppClick }: HomeProps) {
                 Desenvolvimento de websites, aplicativos e e-commerce de alto impacto. Soluções personalizadas que impulsionam seu negócio.
               </motion.p>
               <motion.div
-                className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
+                className="flex flex-col items-start sm:flex-row gap-8 w-1/2 sm:w-auto"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
               >
                 <motion.button
                   onClick={() => onWhatsAppClick('Olá! Gostaria de iniciar um projeto com a DevDeals.')}
-                  className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 sm:px-10 py-4 rounded-full shadow-lg font-semibold cursor-pointer relative group flex items-center gap-2 w-auto min-w-0 sm:min-w-[13.5rem]"
+                  className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 sm:px-10 py-4 rounded-full shadow-lg font-semibold cursor-pointer relative group flex items-center justify-between gap-2w-1/2 sm:w-auto"
                   whileHover={isDesktop ? {
                     width: "100%",
                     boxShadow: "0 20px 40px rgba(147, 51, 234, 0.4)"
                   } : undefined}
-                  whileTap={{ scale: 0.98 }}
+                  whileTap={isDesktop ? { scale: 0.98 } : undefined}
                   transition={{ duration: 0.4, ease: "easeOut" }}
                 >
                   <span className="relative z-10 whitespace-nowrap sm:flex-1 sm:text-left">Iniciar Projeto</span>
-                  <ArrowRight className="w-5 h-5 relative z-10 sm:transition-transform sm:duration-300 sm:group-hover:translate-x-1" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 sm:transition-opacity sm:duration-300 rounded-full"></div>
+                  <ArrowRight className={`w-5 h-5 relative z-10 ${isDesktop ? 'sm:transition-transform sm:duration-300 sm:group-hover:translate-x-1' : ''}`} />
+                  <div className={`absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full ${isDesktop ? 'opacity-0 group-hover:opacity-100 sm:transition-opacity sm:duration-300' : 'opacity-0'}`}></div>
                 </motion.button>
               </motion.div>
 
