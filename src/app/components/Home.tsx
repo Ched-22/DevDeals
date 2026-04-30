@@ -387,7 +387,7 @@ export default function Home({ onWhatsAppClick }: HomeProps) {
                   <ImageWithFallback
                     src={service.image}
                     alt={service.title}
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-200"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-all duration-200"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                   <div className="absolute bottom-6 left-6">
@@ -582,8 +582,8 @@ export default function Home({ onWhatsAppClick }: HomeProps) {
                     </div>
                     <div>
                       <div className="font-semibold mb-1">Telefone</div>
-                      <a href="tel:+351912345678" className="text-purple-100 hover:text-white transition">
-                        +351 91 234 5678
+                      <a href="tel:+351963057340" className="text-purple-100 hover:text-white transition">
+                        +351 96 305 7340
                       </a>
                     </div>
                   </div>
@@ -594,7 +594,7 @@ export default function Home({ onWhatsAppClick }: HomeProps) {
                     </div>
                     <div>
                       <div className="font-semibold mb-1">Localização</div>
-                      <div className="text-purple-100">Lisboa, Portugal</div>
+                      <div className="text-purple-100">Setubal, Portugal</div>
                     </div>
                   </div>
                 </div>
@@ -720,7 +720,7 @@ export default function Home({ onWhatsAppClick }: HomeProps) {
                         pattern="(?:\D*\d){9,}\D*"
                         title="Digite pelo menos 9 numeros"
                         className="w-full pl-12 pr-4 py-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-transparent outline-none transition"
-                        placeholder="91 234 5678"
+                        placeholder="96 305 7340"
                       />
                     </div>
                   </div>
