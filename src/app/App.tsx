@@ -6,7 +6,7 @@ import WhatsAppButton from './components/WhatsAppButton';
 
 export default function App() {
   // Configure o número do WhatsApp aqui (formato: 351912345678)
-  const whatsappNumber = '+351932132126';
+  const whatsappNumber = '+351963057340';
 
   const handleWhatsAppClick = (message: string) => {
     const encodedMessage = encodeURIComponent(message);
