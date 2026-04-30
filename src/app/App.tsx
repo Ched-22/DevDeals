@@ -14,7 +14,7 @@ export default function App() {
   };
 
   return (
-    <div className="size-full overflow-auto bg-gradient-to-br from-purple-50/30 via-blue-50/20 to-purple-50/30">
+    <div className="size-full min-h-0 overflow-y-auto overflow-x-hidden bg-gradient-to-br from-purple-50/30 via-blue-50/20 to-purple-50/30">
       <Navbar whatsappNumber={whatsappNumber} onWhatsAppClick={handleWhatsAppClick} />
       <Home onWhatsAppClick={handleWhatsAppClick} />
       <Footer />

@@ -253,7 +253,7 @@ export default function Home({ onWhatsAppClick }: HomeProps) {
   ];
 
   return (
-    <>
+    <div className="min-w-0 max-w-full overflow-x-hidden">
       {/* Hero Section */}
       <section className="pt-24 sm:pt-32 md:pt-40 pb-16 sm:pb-24 md:pb-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-purple-100/40 via-blue-50/40 to-purple-50/30 -z-10"></div>
@@ -293,7 +293,7 @@ export default function Home({ onWhatsAppClick }: HomeProps) {
               >
                 <motion.button
                   onClick={() => onWhatsAppClick('Olá! Gostaria de iniciar um projeto com a DevDeals.')}
-                  className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 sm:px-10 py-4 rounded-full shadow-lg font-semibold cursor-pointer relative group flex items-center justify-between gap-2w-1/2 sm:w-auto"
+                  className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 sm:px-10 py-4 rounded-full shadow-lg font-semibold cursor-pointer relative group flex items-center justify-between gap-2 w-full sm:w-auto"
                   whileHover={isDesktop ? {
                     width: "100%",
                     boxShadow: "0 20px 40px rgba(147, 51, 234, 0.4)"
@@ -707,7 +707,7 @@ export default function Home({ onWhatsAppClick }: HomeProps) {
                         <option value="+244">🇦🇴 +244</option>
                       </select>
                     </div>
-                    <div className="relative flex-1">
+                    <div className="relative min-w-0 flex-1">
                       <Phone className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                       <input
                         type="tel"
@@ -765,6 +765,6 @@ export default function Home({ onWhatsAppClick }: HomeProps) {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }
