@@ -1,4 +1,5 @@
 import React from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './components/Home';
@@ -15,6 +16,7 @@ export default function App() {
 
   return (
     <div className="size-full min-h-0 overflow-y-auto overflow-x-hidden bg-gradient-to-br from-purple-50/30 via-blue-50/20 to-purple-50/30">
+      <Analytics />
       <Navbar whatsappNumber={whatsappNumber} onWhatsAppClick={handleWhatsAppClick} />
       <Home onWhatsAppClick={handleWhatsAppClick} />
       <Footer />
